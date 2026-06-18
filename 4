@@ -1,0 +1,75 @@
+Open the pom.xml file.
+2. Add the following inside the <project> tag:
+<build>
+<plugins>
+<!-- Compiler Plugin -->
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-compiler-plugin</artifactId>
+<version>3.8.1</version>
+<configuration>
+<source>1.8</source>
+<target>1.8</target>
+</configuration>
+</plugin>
+<!-- Jar Plugin -->
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-jar-plugin</artifactId>
+<version>3.2.0</version>
+<configuration>
+<archive>
+<manifest>
+<addClasspath>true</addClasspath>
+<mainClass>org.example.Main</mainClass>
+</manifest>
+</archive>
+</configuration>
+</plugin>
+</plugins>
+</build>
+-------------
+b) 1. Open the Main.java file.
+2. Add the following code
+package org.example;
+public class Main {
+static void main() {
+System.out.println("Hello students");
+System.out.println("Welcome to Devops Lab");
+System.out.println("Lab Program no.4");
+}
+}
+
+--------------------
+
+mvn clean compile
+mvn package
+
+-----------------
+run the generated JAR file, use:
+java -jar target\MVNGRDLDEMO-1.0-SNAPSHOT.jar
+----------------------------
+gradle init --type pom
+---------------------
+
+Open build.gradle in IntelliJ IDEA.
+2. Ensure the following configurations are correct:
+plugins {
+id 'java'
+}
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+repositories {
+mavenCentral()
+}
+dependencies {
+testImplementation 'junit:junit:4.13.2'
+}
+jar {
+manifest {
+attributes('Main-Class': 'org.example.Main')
+}
+}
+----------------------
+gradle clean build
+java -jar build/libs/MVNGRDLDEMO-1.0-SNAPSHOT.jar
